@@ -1,10 +1,10 @@
-let g:python_path = '/Users/mukaishohei/Programing/dev/www/figurejudge'
+"let g:python_path = 'test'
 let g:current_file_dir = ''
+
 function! GetPyFile()
     let l:line_num = line('.')
     let l:cur_string = getline(l:line_num)
     let l:cur_string = substitute(l:cur_string, '\t', ' ', 'g')
-    let l:cur_string =
     let l:line_len = strlen(l:cur_string)
     let l:last_string = l:cur_string[l:line_len-1]
     let l:forms = []
@@ -56,7 +56,7 @@ function! GetPyFile()
     endif
 
     let l:python_path = g:python_path
-    for l:e in l:froms
+    for l:e in l:forms
         let l:org_path = l:python_path
         let l:python_path = l:python_path . '/' . l:e
         if !isdirectory(l:python_path)

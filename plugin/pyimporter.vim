@@ -2,6 +2,10 @@
 let g:current_file_dir = ''
 
 function! GetPyFile()
+    let l:sh_pythonpath = $PYTHONPATH
+    let l:sh_pythonpaths = split(l:sh_pythonpath, ':')
+
+    " 解析部分
     let l:line_num = line('.')
     let l:cur_string = getline(l:line_num)
     let l:cur_string = substitute(l:cur_string, '\t', ' ', 'g')
@@ -35,6 +39,7 @@ function! GetPyFile()
         return
     endif
 
+    " ファイ取得部分
     let l:python_path = expand('%:h')
     if len(l:forms) > 0
         for l:e in l:froms
@@ -55,6 +60,7 @@ function! GetPyFile()
         return
     endif
 
+    " 基本的にはファイル解析同じ処理をしている。
     let l:python_path = g:python_path
     for l:e in l:forms
         let l:org_path = l:python_path

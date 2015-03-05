@@ -83,3 +83,27 @@ function! GetPyFile()
         echo 'no file'
     endif
 endfunction
+
+function! GetTargetFile(path, from, imp)
+    let l:python_path = g:python_path
+    for l:e in l:forms
+        let l:org_path = l:python_path
+        let l:python_path = l:python_path . '/' . l:e
+        if !isdirectory(l:python_path)
+            let l:py_file = l:python_path . '.py'
+            if filereadable(l:py_file)
+                exe 'e ' . findfile(l:py_file)
+            else
+                echo 'no file'
+            endif
+            return
+        endif
+    endfor
+    let l:py_file = l:python_path . '/' . l:dict['import'] . '.py'
+    echo l:py_file
+    if filereadable(l:py_file)
+        exe 'e ' . findfile(l:py_file)
+    else
+        echo 'no file'
+    endif
+endfunction

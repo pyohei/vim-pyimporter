@@ -84,9 +84,9 @@ function! GetPyFile()
     endif
 endfunction
 
-function! GetTargetFile(path, from, imp)
-    let l:python_path = g:python_path
-    for l:e in l:forms
+function! GetTargetFile(path, froms, imp)
+    let l:python_path = a:path
+    for l:e in a:froms
         let l:org_path = l:python_path
         let l:python_path = l:python_path . '/' . l:e
         if !isdirectory(l:python_path)
@@ -99,7 +99,7 @@ function! GetTargetFile(path, from, imp)
             return
         endif
     endfor
-    let l:py_file = l:python_path . '/' . l:dict['import'] . '.py'
+    let l:py_file = l:python_path . '/' . a:imp . '.py'
     echo l:py_file
     if filereadable(l:py_file)
         exe 'e ' . findfile(l:py_file)

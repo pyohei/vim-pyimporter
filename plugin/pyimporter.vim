@@ -84,6 +84,13 @@ function! GetPyFile()
     endif
 endfunction
 
+function! TestPy()
+    let test = GetTargetFile(
+        \"",
+        \[""], "")
+    echo test
+endfunction
+
 function! GetTargetFile(path, froms, imp)
     let l:python_path = a:path
     for l:e in a:froms
@@ -93,8 +100,10 @@ function! GetTargetFile(path, froms, imp)
             let l:py_file = l:python_path . '.py'
             if filereadable(l:py_file)
                 exe 'e ' . findfile(l:py_file)
+                return 1
             else
                 echo 'no file'
+                return 0
             endif
             return
         endif

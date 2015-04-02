@@ -3,6 +3,7 @@ let g:current_file_dir = ''
 
 function! GoTargetFile(paths, froms, imp)
     for l:p in a:paths
+        echo l:p
         let l:python_path = l:p
         for l:e in a:froms
             let l:org_path = l:python_path
@@ -12,11 +13,7 @@ function! GoTargetFile(paths, froms, imp)
                 if filereadable(l:py_file)
                     exe 'e ' . findfile(l:py_file)
                     return 1
-                "else
-                "    echo 'No exist in from list.'
-                "    return 0
                 endif
-                return
             endif
         endfor
         let l:py_file = l:python_path . '/' . a:imp . '.py'
@@ -25,6 +22,7 @@ function! GoTargetFile(paths, froms, imp)
             exe 'e ' . findfile(l:py_file)
             return 1
         endif
+    endfor
     echo 'No exist in import string'
     return 0
 endfunction
@@ -81,11 +79,27 @@ function! CollectPyPath()
     return l:python_paths
 endfunction
 
+function! ReferProject()
+    let l:py_paths = []
+    if exists('g:py_projects')
+        let l:cur_dir = getcwd()
+        let l:py_keys = keys(g:py_projects)
+        for l:py_key in l:py_keys
+            if stridx(l:cur_dir, l:py_key) != -1
+                let l:py_paths += g:py_projects[l:py_key]
+                call add(l:py_paths, expand('%:h'))
+                return l:py_paths
+            endif
+        endfor
+        return call add(l:python_paths, expand('%:h'))
+    endif
+endfunction
 
 function! TestParse()
+    let pys = ReferProject()
     let line = GetImpLines()
     let res = ParseLine(line)
-    let pys = CollectPyPath()
+    " let pys = CollectPyPath()
     let resul = GoTargetFile(pys, res['froms'], res['import'])
     echo resul
     "echo res

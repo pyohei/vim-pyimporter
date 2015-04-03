@@ -2,6 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import config
-from src import HOGEHOGE
+from src.src import HOGEHOGE
 from src.lib.lib import HOGEHOGE
 from src.lib import lib

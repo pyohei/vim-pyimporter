@@ -105,4 +105,6 @@ function! TestParse()
     "echo res
 endfunction
 
-
+function! Testload()
+    call test#toggle()
+endfunction

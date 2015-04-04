@@ -3,9 +3,10 @@ vim-pyimporter
 
 This enable jump to import python file.
 
-## In python file can import other python file. Basic vim doesn't jump importfile. Using this plugin, user can jump to import file. However user need to set defines python paths by projects.
+## Description
+In python file can import other python file. Basic vim doesn't jump importfile. Using this plugin, user can jump to import file. However user need to set defines python paths by projects.
 
-## DEMO: No
+## DEMO
 
 ## Usage
 
@@ -13,7 +14,8 @@ This enable jump to import python file.
 
 ## Contribution
 
-## Licence: MIT
+## Licence
+MIT
 
 [MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
 

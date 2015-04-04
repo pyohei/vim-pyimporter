@@ -1,5 +1,7 @@
 "let g:python_path = 'test'
-let g:current_file_dir = ''
+
+let s:save_cpo = &cpoptions
+set cpoptions&vim
 
 function! GoTargetFile(paths, froms, imp)
     for l:p in a:paths
@@ -110,7 +112,6 @@ function! importer#referCurProject()
     return 'No Project'
 endfunction
 
-
 function! importer#import()
     let l:pys = ReferProject()
     let l:line = GetImpLines()
@@ -125,3 +126,5 @@ function! importer#import()
     let resul = GoTargetFile(pys, res['froms'], res['import'])
 endfunction
 
+let &cpoptions = s:save_cpo
+unlet s:save_cpo

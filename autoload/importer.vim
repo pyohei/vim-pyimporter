@@ -17,7 +17,6 @@ function! GoTargetFile(paths, froms, imp)
             endif
         endfor
         let l:py_file = l:python_path . '/' . a:imp . '.py'
-        echo l:py_file
         if filereadable(l:py_file)
             exe 'e ' . findfile(l:py_file)
             return 1
@@ -47,7 +46,7 @@ function! ParseLine(imp_string)
     endif
     if !has_key(l:dict, 'import')
         echo 'Error! lost import'
-        return
+        return -1
     endif
     let l:imports = {'froms': l:froms, 'import': l:dict['import']}
     return l:imports
@@ -91,17 +90,38 @@ function! ReferProject()
                 return l:py_paths
             endif
         endfor
-        return call add(l:python_paths, expand('%:h'))
     endif
+    return call add(l:python_paths, expand('%:h'))
 endfunction
 
+function! importer#referCurProject()
+    let l:cur_project = {}
+    if exists('g:py_projects')
+        let l:cur_dir = getcwd()
+        let l:py_keys = keys(g:py_projects)
+        for l:py_key in l:py_keys
+            if stridx(l:cur_dir, l:py_key) != -1
+                let l:cur_project['name'] = l:py_key
+                let l:cur_project['paths'] = g:py_projects[l:py_key]
+                return l:cur_project
+            endif
+        endfor
+    endif
+    return 'No Project'
+endfunction
+
+
 function! importer#import()
-    let pys = ReferProject()
-    let line = GetImpLines()
-    let res = ParseLine(line)
+    let l:pys = ReferProject()
+    let l:line = GetImpLines()
+    let l:res = ParseLine(line)
+    try
+        if l:res == -1
+            return
+        endif
+    catch
+    endtry
     " let pys = CollectPyPath()
     let resul = GoTargetFile(pys, res['froms'], res['import'])
-    echo resul
-    "echo res
 endfunction
 

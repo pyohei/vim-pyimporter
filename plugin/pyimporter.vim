@@ -10,7 +10,7 @@ let g:loaded_pyimporter= 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-command! -nargs=* -ranges=0 -complete=customlist,importer#import PyImport
+command! -nargs=* -range=0 -complete=customlist,importer#import PyImport
             \ call importer#import()
 
 function! PyImport()
@@ -26,6 +26,9 @@ function! ReferCurProject()
     echo l:project
 endfunction
 
+function! TestPyImportEcho()
+    echo "test"
+endfunction
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

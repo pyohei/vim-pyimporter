@@ -1,5 +1,5 @@
 "
-"
+" Importer Base Script
 "
 
 if exists('g:loaded_pyimporter')

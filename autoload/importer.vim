@@ -1,3 +1,10 @@
+" ----------------------------------------------------------------------
+" Python import plugin
+" Version: 0.0.0
+" Author: pyohei
+" Licence: MTI Licence
+" ----------------------------------------------------------------------
+"
 "let g:python_path = 'test'
 
 let s:save_cpo = &cpoptions

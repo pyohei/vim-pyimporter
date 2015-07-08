@@ -1,6 +1,9 @@
-"
-" Importer Base Script
-"
+" ----------------------------------------------------------------------
+" Python path import plugin
+" Version: 0.0.0
+" Author: pyohei
+" Licence: MTI Licence
+" ----------------------------------------------------------------------
 
 if exists('g:loaded_pyimporter')
   finish

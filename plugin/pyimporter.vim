@@ -29,6 +29,10 @@ function! ReferCurProject()
     echo l:project
 endfunction
 
+function! AddPyImportBase()
+    echo "Add PyImportBase"
+endfunction
+
 function! TestPyImportEcho()
     echo "test"
 endfunction

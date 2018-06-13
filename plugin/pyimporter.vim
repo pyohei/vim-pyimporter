@@ -5,9 +5,11 @@
 " Licence: MTI Licence
 " ----------------------------------------------------------------------
 
+unlet g:loaded_pyimporter
 if exists('g:loaded_pyimporter')
   finish
 endif
+echo "start"
 let g:loaded_pyimporter= 1
 
 let s:save_cpo = &cpo
@@ -34,6 +36,7 @@ function! AddPyImportBase()
 endfunction
 
 function! TestPyImportEcho()
+    " call importer#addBase()
     echo "test"
 endfunction
 

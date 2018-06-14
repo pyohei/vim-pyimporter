@@ -121,15 +121,21 @@ function! importer#referCurProject()
 endfunction
 
 function! importer#import()
+    " Load target import statement
     let l:line = GetImpLines()
     let l:res = ParseLine(line)
     try
         if l:res == -1
+            echo "You don't select import line"
             return
         endif
     catch
     endtry
+
+    " Load python path
     let pys = CollectPyPath()
+
+    " Move to target file
     let resul = GoTargetFile(pys, res['froms'], res['import'])
 endfunction
 

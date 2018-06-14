@@ -11,16 +11,16 @@ let s:save_cpo = &cpoptions
 set cpoptions&vim
 
 function! GoTargetFile(paths, froms, imp)
-    echo a:paths
-    echo a:froms
-    echo a:imp
+    "paths ... python path
+    "froms ... from statement
+    "imp ... import statement
+
+    "Explorer python path directories.
     for l:p in a:paths
-        echo l:p
         let l:python_path = l:p
         for l:e in a:froms
             let l:org_path = l:python_path
             let l:python_path = l:python_path . '/' . l:e
-            echo l:python_path
             if !isdirectory(l:python_path)
                 let l:py_file = l:python_path . '.py'
                 echo l:py_file
@@ -59,7 +59,7 @@ function! ParseLine(imp_string)
         let l:froms = []
     endif
     if !has_key(l:dict, 'import')
-        echo 'Error! lost import'
+        "echo 'Error! lost import'
         return -1
     endif
     let l:imports = {'froms': l:froms, 'import': l:dict['import']}
@@ -99,7 +99,7 @@ function! CollectPyPath()
     endif
 
     "Debug
-    echo l:python_paths
+    "echo l:python_paths
 
     return l:python_paths
 endfunction

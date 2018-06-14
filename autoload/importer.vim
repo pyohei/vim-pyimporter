@@ -21,7 +21,6 @@ function! GoTargetFile(paths, froms, imp)
             let l:python_path = l:python_path . '/' . l:e
             if !isdirectory(l:python_path)
                 let l:py_file = l:python_path . '.py'
-                echo l:py_file
                 if filereadable(l:py_file)
                     exe 'e ' . findfile(l:py_file)
                     return 1

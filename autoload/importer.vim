@@ -104,22 +104,6 @@ function! CollectPyPath()
     return l:python_paths
 endfunction
 
-function! ReferProject()
-    let l:py_paths = []
-    if exists('g:py_projects')
-        let l:cur_dir = getcwd()
-        let l:py_keys = keys(g:py_projects)
-        for l:py_key in l:py_keys
-            if stridx(l:cur_dir, l:py_key) != -1
-                let l:py_paths += g:py_projects[l:py_key]
-                call add(l:py_paths, expand('%:h'))
-                return l:py_paths
-            endif
-        endfor
-    endif
-    return call add(l:python_paths, expand('%:h'))
-endfunction
-
 function! importer#referCurProject()
     let l:cur_project = {}
     if exists('g:py_projects')
@@ -137,7 +121,6 @@ function! importer#referCurProject()
 endfunction
 
 function! importer#import()
-    let l:pys = ReferProject()
     let l:line = GetImpLines()
     let l:res = ParseLine(line)
     try
@@ -146,7 +129,7 @@ function! importer#import()
         endif
     catch
     endtry
-    " let pys = CollectPyPath()
+    let pys = CollectPyPath()
     let resul = GoTargetFile(pys, res['froms'], res['import'])
 endfunction
 

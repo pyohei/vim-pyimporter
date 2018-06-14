@@ -4,8 +4,6 @@
 " Author: pyohei
 " Licence: MTI Licence
 " ----------------------------------------------------------------------
-"
-let g:python_path = 'test'
 
 let s:save_cpo = &cpoptions
 set cpoptions&vim
@@ -104,22 +102,6 @@ function! CollectPyPath()
     return l:python_paths
 endfunction
 
-function! importer#referCurProject()
-    let l:cur_project = {}
-    if exists('g:py_projects')
-        let l:cur_dir = getcwd()
-        let l:py_keys = keys(g:py_projects)
-        for l:py_key in l:py_keys
-            if stridx(l:cur_dir, l:py_key) != -1
-                let l:cur_project['name'] = l:py_key
-                let l:cur_project['paths'] = g:py_projects[l:py_key]
-                return l:cur_project
-            endif
-        endfor
-    endif
-    return 'No Project'
-endfunction
-
 function! importer#import()
     " Load target import statement
     let l:line = GetImpLines()
@@ -138,7 +120,6 @@ function! importer#import()
     " Move to target file
     let resul = GoTargetFile(pys, res['froms'], res['import'])
 endfunction
-
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

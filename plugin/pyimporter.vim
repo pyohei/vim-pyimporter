@@ -1,7 +1,7 @@
 " ----------------------------------------------------------------------
 " Python path import plugin
 " Version: 0.0.0
-" Author: pyohei
+" Author: Shohei Mukai
 " Licence: MTI Licence
 " ----------------------------------------------------------------------
 

@@ -5,20 +5,25 @@
 " Licence: MTI Licence
 " ----------------------------------------------------------------------
 "
-"let g:python_path = 'test'
+let g:python_path = 'test'
 
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
 function! GoTargetFile(paths, froms, imp)
+    echo a:paths
+    echo a:froms
+    echo a:imp
     for l:p in a:paths
         echo l:p
         let l:python_path = l:p
         for l:e in a:froms
             let l:org_path = l:python_path
             let l:python_path = l:python_path . '/' . l:e
+            echo l:python_path
             if !isdirectory(l:python_path)
                 let l:py_file = l:python_path . '.py'
+                echo l:py_file
                 if filereadable(l:py_file)
                     exe 'e ' . findfile(l:py_file)
                     return 1
@@ -79,11 +84,23 @@ function! GetImpLines()
 endfunction
 
 function! CollectPyPath()
-    let l:python_paths = []
-    if exists('g:python_paths')
-        let l:python_paths += g:python_paths
+    " Create PYTHONPATH from the below
+    let l:python_path = system("python -c 'import sys;print(\"\t\".join(sys.path))'")
+    let l:python_paths = split(l:python_path, '\t')
+    
+    " Add current file directory.
+    call add(l:python_paths, expand('%:p:h'))
+    " Add base directory.
+    call add(l:python_paths, getcwd())
+
+    let l:user_python_path = split($PYTHONPATH, ':')
+    if l:user_python_path != []
+        let l:python_paths += l:user_python_path
     endif
-    call add(l:python_paths, expand('%:h'))
+
+    "Debug
+    echo l:python_paths
+
     return l:python_paths
 endfunction
 
@@ -132,6 +149,7 @@ function! importer#import()
     " let pys = CollectPyPath()
     let resul = GoTargetFile(pys, res['froms'], res['import'])
 endfunction
+
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

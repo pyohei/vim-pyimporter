@@ -5,11 +5,9 @@
 " Licence: MTI Licence
 " ----------------------------------------------------------------------
 
-unlet g:loaded_pyimporter
 if exists('g:loaded_pyimporter')
   finish
 endif
-echo "start"
 let g:loaded_pyimporter= 1
 
 let s:save_cpo = &cpo
@@ -20,24 +18,6 @@ command! -nargs=* -range=0 -complete=customlist,importer#import PyImport
 
 function! PyImport()
     call importer#import()
-endfunction
-
-function! ReferProjects()
-    echo g:py_projects
-endfunction
-
-function! ReferCurProject()
-    let l:project = importer#referCurProject()
-    echo l:project
-endfunction
-
-function! AddPyImportBase()
-    echo "Add PyImportBase"
-endfunction
-
-function! TestPyImportEcho()
-    " call importer#addBase()
-    echo "test"
 endfunction
 
 let &cpo = s:save_cpo

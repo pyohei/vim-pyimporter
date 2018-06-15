@@ -1,7 +1,7 @@
 " ----------------------------------------------------------------------
 " Python path import plugin
 " Version: 0.0.0
-" Author: pyohei
+" Author: Shohei Mukai
 " Licence: MTI Licence
 " ----------------------------------------------------------------------
 
@@ -18,19 +18,6 @@ command! -nargs=* -range=0 -complete=customlist,importer#import PyImport
 
 function! PyImport()
     call importer#import()
-endfunction
-
-function! ReferProjects()
-    echo g:py_projects
-endfunction
-
-function! ReferCurProject()
-    let l:project = importer#referCurProject()
-    echo l:project
-endfunction
-
-function! TestPyImportEcho()
-    echo "test"
 endfunction
 
 let &cpo = s:save_cpo

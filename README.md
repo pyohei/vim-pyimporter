@@ -17,6 +17,13 @@ If you want to add this comannd as keymap, add the below command in your `.vimrc
 nnoremap <C-L> :PyImport()<CR>
 ```
 
+## Logic
+
+This script based `PYTHONPATH`.   
+If you can not jump specific module, please review your `PYTHONPATH`.  
+But there are some cases that do not read correctly.
+(I found the case written in `__init__.py`)    
+
 ## Licence
 
 * [MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
